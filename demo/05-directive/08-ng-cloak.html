@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ng-bind 指令</title>
+  <!-- 如果angular是在head中引入的话没有问题 -->
+  <!-- <script src="../bower_components/angular/angular.js"></script> -->
+  <style>
+    /* 如果引用在Body的最下面则需要hack */
+
+    .ng-cloak,
+    [ng-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body ng-app ng-cloak>
+  {{'hello world'}}
+  <script src="../bower_components/angular/angular.js"></script>
+</body>
+
+</html>

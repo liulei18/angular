@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ng-repeat 指令</title>
+	<style>
+		.red{color: red;}
+		.green{color: green;}
+	</style>
+</head>
+<body ng-app="myApp">
+	<ul ng-controller="ListController">
+		<!-- class="{{$even?'red':'green'}}" -->
+		ng-class会根据单钱设置对象的属性和属性值决定添加特定的类名
+		<li ng-repeat="item in data" ng-class="{red:$even,green:$odd}" data-id="{{item.id}}">
+			<strong>{{item.name}}</strong>
+			&nbsp;&nbsp;
+			<span>{{item.age}}</span>
+		</li>
+	</ul>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+		angular.module('myApp',[])
+			.controller('ListController',['$scope',function($scope){
+				$scope.data=[];
+
+				for(var i=1;i<10;i++){
+					$scope.data[$scope.data.length]={
+						id:i,
+						name:'赵小黑'+i,
+						age:20+i
+					};
+				}
+			}]);
+	</script>
+</body>
+</html>

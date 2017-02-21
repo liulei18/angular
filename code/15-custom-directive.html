@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>custom directive</title>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body ng-app="demoApp">
+	<!-- <itcastButton></itcastButton> -->
+	<!-- <itcast-button></itcast-button> -->
+	<!-- <div itcastButton></div> -->
+
+	<btn-primary></btn-primary>
+	<btn-danger></btn-danger>
+	<btn-success></btn-success>
+	<script src="bower_components/angular/angular.js"></script>
+	<script>
+		var demoApp= angular.module('demoApp',[]);
+		demoApp.controller('DemoController',['$scope',function($scope){
+
+		}]);
+		// 定义指令的名字，应该是驼峰命名法
+		demoApp.directive('itcastButton',[function(){
+			//该函数返回一个指令对象
+			return {
+				template:'<input type="button" value="itcast" class="btn btn-lg btn-primary btn-block" />'
+			};
+		}]);
+
+		demoApp.directive('btnPrimary',[function(){
+			return {
+				template:'<input type="button" value="itcast" class="btn btn-primary" />'
+			};
+		}]);
+
+		demoApp.directive('btnDanger',[function(){
+			return {
+				template:'<input type="button" value="itcast" class="btn btn-danger" />'
+			};
+		}]);
+		demoApp.directive('btnSuccess',[function(){
+			return {
+				template:'<input type="button" value="itcast" class="btn btn-success" />'
+			};
+		}]);
+	</script>
+</body>
+</html>
