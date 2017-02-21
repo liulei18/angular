@@ -9,7 +9,12 @@
 		<link rel="stylesheet" href="css/app.css">
 	</head>
 	<body ng-app="MyTodoMvc">
-		<section class="todoapp" ng-controller="MainController">
+		
+		<!-- <div ng-view></div> -->
+		<ng-view></ng-view>
+
+		<script id="main_tmpl" type="text/ng-template">
+			<section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
 				<form ng-submit="add()">
@@ -55,6 +60,8 @@
 				<button class="clear-completed" ng-click="clear()" ng-show="existCompleted()">Clear completed</button>
 			</footer>
 		</section>
+		</script>
+
 		<footer class="info">
 			<p>Double-click to edit a todo</p>
 			<!-- Remove the below line ↓ -->

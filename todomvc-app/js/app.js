@@ -6,17 +6,20 @@
   var myApp = angular.module('MyTodoMvc', ['ngRoute']);
 
   //路由配置
-  // myApp.config(['$routeProvider',function($routeProvider){
-  //   $routeProvider
-  //     .when('/:status?',{
-  //       controller:'MainController',
-  //       templateUrl:''
+  myApp.config(['$routeProvider',function($routeProvider){
+    $routeProvider
+      .when('/:status',{
+        controller:'MainController',
+        templateUrl:'main_tmpl'
 
-  //     });
-  // }]);
+      })
+      .otherwise({
+        redirectTo:'/'
+      });
+  }]);
 
   // 2. 注册一个主要的控制器（属于某个模块），用于往视图（view）中暴露数据
-  myApp.controller('MainController', ['$scope', '$location', function($scope, $location) {
+  myApp.controller('MainController', ['$scope', '$routeParams','$route', function($scope, $routeParams,$route) {
     // [1,2,3,4,5]
     // 获取唯一ID
     function getId() {
@@ -128,28 +131,23 @@
     // 状态筛选
     $scope.selector = {}; // {} {completed:true} {completed:false}
     // 点击事件的方式不合适，有DOM操作
-    // 让$scope也有一个指向$location的数据成员
-    $scope.$location = $location;
-    // watch只能监视属于$scope的成员
-    $scope.$watch('$location.path()', function(now, old) {
-      // 1. 拿到锚点值
-      // 这样写就要求执行环境必须要有window对象
-      // var hash = window.location.hash;
-      // console.log($location);
-      // console.log(now);
-      // 2. 根据锚地值对selector做变换
-      switch (now) {
-        case '/active':
-          $scope.selector = { completed: false };
-          break;
-        case '/completed':
-          $scope.selector = { completed: true };
-          break;
-        default:
-          $scope.selector = {};
-          break;
-      }
-    });
+    
+    var status= $routeParams.status;
+    console.log(status);
+
+    switch(status){
+      case 'active':
+        $scope.selector={completed:false};
+        break;
+      case 'completed':
+        $scope.selector={completed:true};
+        break;
+      default:
+        $route.updateParams({status:''});
+        $scope.selector={};
+        break;
+    }
+   
 
     // 自定义比较函数, 默认filter过滤器使用的是模糊匹配
     $scope.equalCompare = function(source, target) {
